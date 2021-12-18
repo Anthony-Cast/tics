@@ -11,14 +11,13 @@ public class ProyectoApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ProyectoApplication.class, args);
-        Mqtt mqtt= new Mqtt();
-        System.out.println(mqtt.handler());
+
     }
-
-
     @Bean
     CommandLineRunner runner(tempresRepository repository){
         return args -> {
+            Mqtt mqtt = new Mqtt();
+            System.out.println(mqtt.getDato());
             TempPres dato = new TempPres();
         };
     }
