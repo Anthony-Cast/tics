@@ -21,13 +21,13 @@ import com.example.proyecto.repository.tempresRepository;
 @Configuration
 
 public class Mqtt {
-    private Message<?> dato;
+    private String dato;
 
-    public Message<?> getDato() {
+    public String getDato() {
         return dato;
     }
 
-    public void setDato(Message<?> dato) {
+    public void setDato(String dato) {
         this.dato = dato;
     }
 
@@ -86,7 +86,7 @@ public class Mqtt {
             public void handleMessage(Message<?> message) throws MessagingException {
                 String topic = message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC).toString();
                 System.out.println(message.getPayload());
-                setDato((Message<?>) message.getPayload());
+                setDato((String) message.getPayload());
 
             }
         };
