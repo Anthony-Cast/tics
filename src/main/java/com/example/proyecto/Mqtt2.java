@@ -3,9 +3,12 @@ package com.example.proyecto;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Repository;
 
 
 public class Mqtt2 implements MqttCallback {
+
+
 
     private static final String brokerUrl ="tcp://54.198.125.210:1883";
 
@@ -44,6 +47,7 @@ public class Mqtt2 implements MqttCallback {
         System.out.println("Topic:" + topic);
         System.out.println("Message: " +message.toString());
         /* Almacenamos documento en base de datos mongoDb */
+
 
     }
 

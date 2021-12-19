@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.io.Serializable;
 
 @Repository
-public interface tempresRepository extends MongoRepository<TempPres, Serializable> {
+public interface tempresRepository extends MongoRepository<TempPres, String> {
 
 }
