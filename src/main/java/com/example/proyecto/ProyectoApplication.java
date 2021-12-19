@@ -16,9 +16,9 @@ public class ProyectoApplication {
     @Bean
     CommandLineRunner runner(tempresRepository repository){
         return args -> {
-            Mqtt mqtt = new Mqtt();
-            System.out.println(mqtt.getDato());
+            System.out.println(Mqtt.obtenerValor());
             TempPres dato = new TempPres();
         };
     }
 }
+

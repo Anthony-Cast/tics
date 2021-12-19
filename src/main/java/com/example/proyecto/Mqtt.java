@@ -1,7 +1,6 @@
 package com.example.proyecto;
 
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.ServiceActivator;
@@ -16,21 +15,29 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.MessagingException;
-import com.example.proyecto.repository.tempresRepository;
 
 @Configuration
 
 public class Mqtt {
-    private String dato;
 
-    public String getDato() {
-        return dato;
+
+    private static datosmqtt anthony;
+
+    public static class datosmqtt{
+
+        private String dato;
+
+        public String getDato() {
+            return dato;
+        }
+
+        public String setDato(String dato) {
+            this.dato = dato;
+            return dato;
+        }
+
+
     }
-
-    public void setDato(String dato) {
-        this.dato = dato;
-    }
-
     @Bean
     public MqttPahoClientFactory mqttClientFactory() {
         DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
@@ -61,22 +68,6 @@ public class Mqtt {
         return adapter;
     }
 
-    /*@Bean
-    @ServiceActivator(inputChannel = "mqttInputChannel")
-    public MessageHandler handler() {
-
-
-        return new MessageHandler() {
-            @Override
-            public void handleMessage(Message<?> message) throws MessagingException {
-                String topic = message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC).toString();
-                System.out.println(message.getPayload());
-
-            }
-
-        };
-    }*/
-
     @Bean
     @ServiceActivator(inputChannel = "mqttInputChannel")
     public MessageHandler handler() {
@@ -85,10 +76,14 @@ public class Mqtt {
             @Override
             public void handleMessage(Message<?> message) throws MessagingException {
                 String topic = message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC).toString();
-                System.out.println(message.getPayload());
-                setDato((String) message.getPayload());
-
+                anthony.setDato((String) message.getPayload());
             }
         };
     }
+
+
+    public static String obtenerValor(){
+        return anthony.getDato();
+    }
 }
+
