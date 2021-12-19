@@ -2,17 +2,10 @@ package com.example.proyecto;
 
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import org.springframework.context.annotation.Configuration;
+
 
 public class Mqtt2 implements MqttCallback {
-    @Override
-    public void connectionLost(Throwable throwable) {
-    }
-    @Override
-    public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
-    }
-    @Override
-    public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
-    }
 
     private static final String brokerUrl ="tcp://54.198.125.210:1883";
 
@@ -40,6 +33,20 @@ public class Mqtt2 implements MqttCallback {
             System.out.println(me);
         }
     }
+
+    public void connectionLost(Throwable arg0) {
+    }
+
+    public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
+    }
+
+    public void messageArrived(String topic, MqttMessage message) {
+        System.out.println("Topic:" + topic);
+        System.out.println("Message: " +message.toString());
+        /* Almacenamos documento en base de datos mongoDb */
+
+    }
+
 
 
 
