@@ -13,12 +13,6 @@ public class ProyectoApplication {
         SpringApplication.run(ProyectoApplication.class, args);
 
     }
-    @Bean
-    CommandLineRunner runner(tempresRepository repository){
-        return args -> {
-            System.out.println(Mqtt.obtenerValor());
-            TempPres dato = new TempPres();
-        };
-    }
+
 }
 
