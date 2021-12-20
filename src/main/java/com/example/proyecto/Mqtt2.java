@@ -7,16 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Repository;
-import com.example.proyecto.repository.tempresRepository;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
 
 
 public class Mqtt2 implements MqttCallback {
 
-    @Autowired
-    tempresRepository tempresRepository;
-
+    tempresRepository repository;
 
     private static final String brokerUrl ="tcp://54.198.125.210:1883";
 
@@ -87,25 +93,26 @@ public class Mqtt2 implements MqttCallback {
         System.out.println(timestamp);
 
         /* Iniciamos la entidad tempres y colocamos datos en el mongodb */
-        TempPres tempPres = new TempPres(temp_float,bol_pres_act, bol_pres_ant, timestamp );
+        /*TempPres tempPres = new TempPres(temp_float,bol_pres_act, bol_pres_ant, timestamp);
+
+         */
         /*tempPres.setId(1);
         tempPres.setTemperatura(temp_float);
         tempPres.setPresencia_actual(bol_pres_act);
         tempPres.setPresencia_anterior(bol_pres_ant);
         tempPres.setTimestamp(timestamp);*/
+        TempPres nuevo = new TempPres("1", 20.0, true, false, "20-20-20");
 
-        tempresRepository.insert(tempPres);
-
-
+        repository.save(nuevo);
         System.out.println("Message: " +message.toString());
+
     }
 
-   /*@Bean
-    CommandLineRunner runner(tempresRepository repository){
-        return args -> {
-            TempPres tempPres = new TempPres(20.0,false,false,"hola");
-            repository.insert(tempPres);
-        };*/
-    }
+
+
+
+
+
+}
 
 

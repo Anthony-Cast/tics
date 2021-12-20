@@ -16,6 +16,14 @@ public class ProyectoApplication {
         Mqtt2 connectionmqtt = new Mqtt2();
         connectionmqtt.subscribe();
 
+
+    }
+    @Bean
+    CommandLineRunner runner(tempresRepository repository){
+        return args -> {
+            TempPres tempPres = new TempPres("1",20.0,false,false, "20-20-20");
+            repository.insert(tempPres);
+        };
     }
 
 
