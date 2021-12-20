@@ -8,13 +8,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.Entity;
 
 @Data
-@Document(collection = "TempPres")
+@Document
 public class TempPres {
     @Id
-    @NonNull
-    private String id;
+    private Integer id;
     private Float temperatura;
-    private Boolean presencia_anterior;
     private Boolean presencia_actual;
+    private Boolean presencia_anterior;
     private String timestamp;
+
 }
